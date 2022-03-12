@@ -124,7 +124,7 @@ p {
 
 
 /*
-Background Image
+Background Image and Layout Setup
 */
 
 html,
@@ -174,7 +174,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20%;
+    gap: 15%;
 }
 
 .headerCard {
@@ -186,6 +186,20 @@ h1 {
     display: flex;
     flex-direction: column;
     line-height: 1;
+}
+
+.scrollButton {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border: 3px solid white;
+    border-radius: 100%;
+}
+
+.scrollButton img {
+    width: 100%;
+    padding: 10%;
 }
 
 
@@ -225,4 +239,8 @@ header p {
 
 .scrollButton {
     color: white;
+}
+
+html {
+    scroll-behavior: smooth;
 }
