@@ -10,4 +10,5 @@ const mainElement = document.querySelector('main');
 scrollButton.addEventListener('click', function(click) {
     // Scroll to main
     mainElement.scrollIntoView();
+    
 })
