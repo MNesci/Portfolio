@@ -133,6 +133,7 @@ body {
 }
 
 body {
+    background-color: black;
     background-image: url('../img/torontoAtNight.jpg');
     background-size: cover;
     background-position: left;
@@ -140,17 +141,15 @@ body {
     background-attachment: fixed;
 }
 
-main,
-footer {
-    width: 80%;
-    margin: auto;
-}
+/* Shrink main and footer to show backgroun above 799px */
 
+@media screen and (min-width: 799px) {
 
-main,
-footer {
-    background-color: black;
-    height: 600px;
+    main,
+    footer {
+        width: 80%;
+        margin: auto;
+    }
 }
 
 /*
@@ -158,28 +157,34 @@ Header Layout
 */
 
 header {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .headerContentContainer {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .35);
+    max-width: 580px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25%;
+    gap: 30px;
 }
 
 .headerCard {
     display: flex;
     align-items: center;
+}
+
+/* Stack Header Card under 390px */
+
+@media screen and (max-width: 389px) {
+
+    .headerCard {
+        flex-direction: column-reverse;
+    }
 }
 
 h1 {
@@ -188,31 +193,41 @@ h1 {
     line-height: 1;
 }
 
-.headerCenter {
-    max-width: 600px;
+/* Center header paragraph under 580px */
+
+@media screen and (max-width: 579px) {
+
+    header p {
+        text-align: center;
+    }
+}
+
+.headerButtonsContainer {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 10px 2%;
 }
 
-.contactButton {
-    border: none;
-    padding: 5px;
+/* Stack buttons under 545px */
+
+@media screen and (min-width: 545px) {
+
+    .headerButtonsContainer {
+        gap: 30px;
+    }
 }
 
-.scrollButton {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    border: 3px solid white;
-    border-radius: 100%;
+@media screen and (max-width: 544px) {
+    .headerButtonsContainer {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
-.scrollButton img {
-    width: 100%;
-    padding: 10%;
+.button {
+    padding: 10px;
+    border-radius: 10px;
+    letter-spacing: 2px;
 }
 
 
@@ -230,7 +245,12 @@ Header Style
 */
 
 header {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.headerContentContainer {
     color: white;
+    background-color: rgba(0, 0, 0, .75);
 }
 
 h1 {
@@ -238,33 +258,43 @@ h1 {
 }
 
 .headingName {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 .headingService {
-    font-size: 3rem;
-    color: #d3d3d3;
-}
-
-.headerCenter {
-    background-color: rgba(0, 0, 0, .35);
-}
-
-.headerCenter p {
     font-size: 2.5rem;
 }
 
-.contactButton {
-    font-size: 3rem;
-    color: white;
-    background-color: rgba(0, 0, 0, .8);
-    border-radius: 15%;
-    
-    
+header p {
+    font-size: 2rem;
 }
 
-.scrollButton {
+.button {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.contactButton {
     color: white;
+    background-color: #710000;
+}
+
+.contactButton:hover {
+    background-color: #7f0000
+}
+
+.learnMoreButton {
+    color: white;
+    border: 1px solid #710000;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.learnMoreButton:hover {
+    background-color: #000;
 }
 
 html {
