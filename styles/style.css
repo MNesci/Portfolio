@@ -124,6 +124,12 @@ p {
 
 
 
+.button {
+    padding: 10px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+}
+
 
 /*
 Header Layout
@@ -198,12 +204,6 @@ h1 {
     }
 }
 
-.button {
-    padding: 10px;
-    border-radius: 10px;
-    letter-spacing: 2px;
-}
-
 
 /*
 Main Layout
@@ -214,8 +214,7 @@ main > section {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding: 20px 3%;
 }
 
 
@@ -325,6 +324,83 @@ Portfolio Section Layout
 /*
 Contact Section Layout
 */
+
+.contactSection h2 {
+    text-align: center;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 20px;
+}
+
+.customerInfoSection {
+    display: flex;
+    gap: 10px;
+}
+
+/* Stack under 950px */
+
+@media screen and (min-width: 950px) {
+    
+    .customerInfoSubsection {
+        max-width: 30%;
+    }
+
+    .contactForm {
+        max-width: 900px;
+    }
+}
+
+@media screen and (max-width: 949px) {
+
+    .customerInfoSection {
+        flex-direction: column;
+    }
+
+    .contactForm {
+        max-width: 450px;
+    }
+}
+
+
+.customerInfoSubsection input {
+    max-width: 100%;
+}
+
+.customerInfoSubsection {
+    display: flex;
+    flex-direction: column;
+}
+
+.customerInquirySection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.customerInquirySubjectSection,
+.customerInquiryBodySection {
+    display: flex;
+    flex-direction: column;
+}
+
+#customerName,
+#customerEmail,
+#customerPhone,
+#customerInquirySubject {
+    height: 30px;
+}
+
+#customerInquiryBody {
+    height: 200px;
+}
+
+.sendMessageButton {
+    align-self: center;
+}
 
 
 
@@ -498,7 +574,36 @@ Portfolio Section Style
 }
 
 
+/*
+Contact Section Style
+*/
 
+.contactSection {
+    font-family: inherit;
+}
+
+#customerName,
+#customerEmail,
+#customerPhone,
+#customerInquirySubject,
+.contactSection label {
+    font-size: 2rem;
+}
+
+#customerInquiryBody {
+    font-size: 1.8rem;
+}
+
+.sendMessageButton {
+    background-color: #710000;
+    color: white;
+    font-family: inherit;
+    border: none;
+}
+
+.sendMessageButton:hover {
+    background-color: #980000;
+}
 
 
 /*
