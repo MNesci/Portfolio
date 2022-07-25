@@ -334,14 +334,12 @@ Contact Section Layout
     flex-direction: column;
     margin: auto;
     gap: 20px;
-    border: 1px solid green;
 }
 
 .customerInfoSection {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    border: 1px solid red;
 }
 
 /* Stack under 800px */
