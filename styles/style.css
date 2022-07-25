@@ -334,40 +334,45 @@ Contact Section Layout
     flex-direction: column;
     margin: auto;
     gap: 20px;
+    border: 1px solid green;
 }
 
 .customerInfoSection {
     display: flex;
+    justify-content: space-between;
     gap: 10px;
+    border: 1px solid red;
 }
 
-/* Stack under 950px */
+/* Stack under 800px */
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 700px) {
     
     .customerInfoSubsection {
-        max-width: 30%;
+        max-width: 32%;
     }
 
-    .contactForm {
-        max-width: 900px;
+    .contactForm,
+    .customerInfoSection {
+        max-width: 800px;
     }
 }
 
-@media screen and (max-width: 949px) {
+@media screen and (max-width: 699px) {
 
     .customerInfoSection {
         flex-direction: column;
     }
 
-    .contactForm {
+    .contactForm,
+    .customerInfoSection {
         max-width: 450px;
     }
 }
 
 
 .customerInfoSubsection input {
-    max-width: 100%;
+    width: 100%;
 }
 
 .customerInfoSubsection {
