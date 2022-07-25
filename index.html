@@ -90,32 +90,32 @@
         </section>
         <section class="contactSection">
             <h2>Contact Me</h2>
-            <form class="contactForm">
+            <form class="contactForm" name="contact" method="POST" data-netlify="true">
                 <fieldset class="customerInfoSection">
                     <section class="customerInfoSubsection">
                         <label for="customerName">Name</label>
-                        <input id="customerName" type="text" placeholder="Name">
+                        <input id="customerName" type="text" name="name" placeholder="Name">
                     </section>
                     <section class="customerInfoSubsection">
                         <label for="customerEmail">Email</label>
-                        <input id="customerEmail" type="email" placeholder="Email">
+                        <input id="customerEmail" type="email" name="email" placeholder="Email">
                     </section>
                     <section class="customerInfoSubsection">
                         <label for="customerPhone">Phone Number</label>
-                        <input id="customerPhone" type="phone" placeholder="123 456 7890">
+                        <input id="customerPhone" type="phone" name="phonenumber" placeholder="123 456 7890">
                     </section>
                 </fieldset>
                 <fieldset class="customerInquirySection">
                     <section class="customerInquirySubjectSection">
                         <label for="customerInquirySubject">Message Subject</label>
-                        <input id="customerInquirySubject" type="text" placeholder="Subject">
+                        <input id="customerInquirySubject" type="text" name="subject" placeholder="Subject">
                     </section>
                     <section class="customerInquiryBodySection">
                         <label for="customerInquiryBody">Message Body</label>
-                        <textarea id="customerInquiryBody" placeholder="Your Message"></textarea>
+                        <textarea id="customerInquiryBody" name="body" placeholder="Your Message"></textarea>
                     </section>
                 </fieldset>
-                <input class="sendMessageButton button" value="Send Message" type="button">
+                <input class="sendMessageButton button" value="Send Message" type="submit">
             </form>
         </section>
     </main>
