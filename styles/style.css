@@ -53,6 +53,18 @@ table {
 Base
 */
 
+:root {
+    --color-accent: #ff5e57;
+    --color-accent-hover: #e84e47;
+    --color-navy: #1a2b4a;
+    --color-text-muted: #6b7280;
+    --color-hero-bg: #f0f2f5;
+    --color-card-bg: #ffffff;
+    --color-border: rgba(26, 43, 74, 0.08);
+    --shadow-card: 0 4px 24px rgba(26, 43, 74, 0.06);
+    --shadow-card-hover: 0 16px 48px rgba(26, 43, 74, 0.12);
+}
+
 html {
     font-size: 62.5%;
 }
@@ -67,23 +79,53 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    color: var(--color-navy);
     margin-bottom: 10px;
 }
 
 h1 {
     font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 h2 {
-    font-size: 2.6rem;
+    font-size: 3.2rem;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 h3 {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
-p {
+h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+p,
+span,
+li {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.6rem;
+}
+
+main p,
+main li {
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--color-text-muted);
 }
 
 a {
@@ -135,73 +177,108 @@ p {
 Header Layout
 */
 
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-navy);
+}
+
 header {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+}
+
+main {
+    margin-top: 70px;
 }
 
 .headerContentContainer {
-    max-width: 580px;
-    padding: 20px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 40px;
 }
 
-.headerCard {
+.headerRight {
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
-/* Stack Header Card under 390px */
+.headerButtonContainer {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
-@media screen and (max-width: 389px) {
+@media screen and (max-width: 800px) {
 
-    .headerCard {
-        flex-direction: column-reverse;
+    .headerButtonContainer:not(.headerConnectButtonContainer) {
+        display: none;
+        visibility: hidden;
     }
 }
 
-h1 {
-    display: flex;
-    flex-direction: column;
-    line-height: 120%;
-    margin: 0;
+
+/*
+Header Style
+*/
+
+header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Center header paragraph under 580px */
-
-@media screen and (max-width: 579px) {
-
-    header p {
-        text-align: center;
-    }
+header span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
 }
 
-.headerButtonsContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.headerLogo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.8rem !important;
+    color: var(--color-navy);
+    letter-spacing: 0.08em;
 }
 
-/* Stack buttons under 545px */
-
-@media screen and (min-width: 545px) {
-
-    .headerButtonsContainer {
-        gap: 30px;
-    }
+.headerButtonContainer {
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
 }
 
-@media screen and (max-width: 544px) {
-    .headerButtonsContainer {
-        flex-direction: column;
-        gap: 15px;
-    }
+.headerButtonContainer:hover,
+.headerLogo:hover {
+    color: var(--color-accent);
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.headerButtonContainer span {
+    color: inherit;
+}
+
+.headerConnectButtonContainer {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 10px 20px;
+    transition: background-color 0.2s ease;
+}
+
+.headerConnectButtonContainer span {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.headerConnectButtonContainer:hover {
+    background-color: var(--color-accent-hover);
 }
 
 
@@ -217,194 +294,586 @@ main > section {
     padding: 20px 3%;
 }
 
-
 /*
-About Section Layout
+Hero Section Layout
 */
 
-.aboutSection {
+.heroSection {
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 60px 0 0;
+    background-color: var(--color-hero-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.heroInner {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 3% 80px;
+}
+
+.heroLeft {
+    width: 55%;
+    padding-top: 20px;
+}
+
+.heroRight {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.heroImageContainer {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+}
+
+.heroImageContainer img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.heroActions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+}
+
+.heroWave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: 0;
+}
+
+.heroWave svg {
+    width: 100%;
+    height: 80px;
+    display: block;
+}
+
+.heroBridge {
+    max-width: none;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    gap: 40px;
+    padding: 50px 5% 60px;
+    margin-bottom: 40px;
+    background-color: #ffffff;
 }
 
-/* Stack under 900px */
+.heroBridgeText {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-navy);
+    line-height: 1.4;
+    margin-bottom: 0;
+    max-width: 420px;
+}
 
-@media screen and (min-width: 901px) {
+.heroBridgeTextRight {
+    text-align: right;
+}
 
-    .aboutTextContainer {
-        width: 55%;
-    }
 
-    .aboutImageContainer {
-        width: 35%;
-    }
-}  
+/*
+Hero Section Style
+*/
+
+.heroEyebrow {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+}
+
+.heroLeft h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 4.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-navy);
+    margin-bottom: 24px;
+}
+
+.heroLeft p {
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    max-width: 520px;
+    margin-bottom: 0;
+}
+
+.heroPrimaryButton {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.heroPrimaryButton:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-1px);
+}
+
+.heroSecondaryButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+    transition: color 0.2s ease;
+}
+
+.heroSecondaryButton:hover {
+    color: var(--color-accent);
+}
+
+.heroPlayIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--color-navy);
+    flex-shrink: 0;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.heroPlayIcon svg {
+    width: 14px;
+    height: 14px;
+    margin-left: 2px;
+}
+
+.heroSecondaryButton:hover .heroPlayIcon {
+    border-color: var(--color-accent);
+    background-color: rgba(255, 94, 87, 0.08);
+}
 
 @media screen and (max-width: 900px) {
-
-    .aboutSection {
-        flex-direction: column;
+    .heroInner {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-bottom: 100px;
     }
 
-    .aboutTextContainer {
+    .heroLeft,
+    .heroRight {
         width: 100%;
     }
 
-    .aboutImageContainer {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-
-    .aboutImageContainer {
-        width: 70%;
-    }
-}
-
-.aboutTextContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.aboutImageContainer img {
-    width: 100%;
-}
-
-/*
-Portfolio Section Layout
-*/
-
-.portfolioSection {
-    margin-top: 50px;
-}
-
-.portfolioGalleryContainer {
-    display: flex;
-    gap: 10px;
-}
-
-/* Stack portfolio sites below 915px */
-
-@media screen and (min-width: 915px) {
-
-    .portfolioGalleryContainer {
-        justify-content: space-between;
-        flex-wrap: wrap;
+    .heroLeft p {
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .portfolioSiteSection {
-        max-width: 45%;
+    .heroActions {
+        justify-content: center;
     }
-}
 
-@media screen and (max-width: 914px) {
-    
-    .portfolioGalleryContainer {
+    .heroLeft h1 {
+        font-size: 3.6rem;
+    }
+
+    .heroBridge {
         flex-direction: column;
-        align-items: center;
+        text-align: center;
+        padding: 40px 5%;
     }
 
-    .portfolioSiteSection {
-        max-width: 80%;
+    .heroBridgeText,
+    .heroBridgeTextRight {
+        text-align: center;
+        max-width: none;
+    }
+
+    .heroBridgeText {
+        font-size: 2rem;
     }
 }
 
-.portfolioSiteSection img {
-    width: 100%;
+@media screen and (max-width: 500px) {
+    .heroSection {
+        padding-top: 30px;
+    }
+
+    .heroLeft h1 {
+        font-size: 2.8rem;
+    }
+
+    .heroActions {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
+
 
 
 /*
-Contact Section Layout
+Roles Section Layout
 */
 
-.contactSection h2 {
+/*
+Alternating section backgrounds
+*/
+
+.rolesSection,
+.experienceSection,
+.projectsSection,
+.approachSection {
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 80px 5% 90px;
+}
+
+.rolesSection,
+.projectsSection {
+    background-color: var(--color-hero-bg);
+}
+
+.experienceSection,
+.approachSection {
+    background-color: #ffffff;
+}
+
+.sectionEyebrow {
+    display: block;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+}
+
+.rolesSection h2,
+.experienceSection h2,
+.projectsSection h2,
+.approachSection h2 {
+    max-width: 640px;
+    margin: 0 auto 56px;
     text-align: center;
 }
 
-.contactForm {
+.rolesContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.roleCard {
     display: flex;
     flex-direction: column;
-    margin: auto;
-    gap: 20px;
+    padding: 32px 28px;
 }
 
-.customerInfoSection {
+
+/*
+Roles Section Style
+*/
+
+.roleCard {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.roleCard::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    transition: width 0.25s ease;
+}
+
+.roleCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(255, 94, 87, 0.2);
+}
+
+.roleCard:hover::before {
+    width: 48px;
+}
+
+.roleCardHeading {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+}
+
+.roleCard p {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 900px) {
+    .rolesContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rolesSection {
+        padding: 60px 5% 70px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .rolesContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .rolesSection h2 {
+        margin-bottom: 40px;
+    }
+}
+
+
+/*
+Shared section typography
+*/
+
+.experienceSection h3,
+.approachSection h3,
+.projectsSection h3 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.experienceSection li,
+.approachStepCard p,
+.projectCard p,
+.projectCard li {
+    font-size: 1.5rem;
+}
+
+
+/*
+Experience Section Layout
+*/
+
+.experienceHighlightsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.experienceCard {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    flex-direction: column;
+    padding: 32px 28px;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-/* Stack under 800px */
-
-@media screen and (min-width: 700px) {
-    
-    .customerInfoSubsection {
-        max-width: 32%;
-    }
-
-    .contactForm,
-    .customerInfoSection {
-        max-width: 800px;
-    }
+.experienceCard::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    transition: width 0.25s ease;
 }
 
-@media screen and (max-width: 699px) {
-
-    .customerInfoSection {
-        flex-direction: column;
-    }
-
-    .contactForm,
-    .customerInfoSection {
-        max-width: 450px;
-    }
+.experienceCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(255, 94, 87, 0.2);
 }
 
+.experienceCard:hover::before {
+    width: 48px;
+}
 
-.customerInfoSubsection input {
+.experienceCard h3 {
+    text-align: left;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+}
+
+.experienceCompany {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.experienceCompanyText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.experienceCompanyLogoContainer {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: var(--color-hero-bg);
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+.experienceCompanyLogoContainer img {
     width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
-.customerInfoSubsection {
+.experienceSection ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.experienceSection li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 12px;
+    line-height: 1.7;
+}
+
+.experienceSection li:last-child {
+    margin-bottom: 0;
+}
+
+.experienceSection li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+}
+
+.experienceCompanyName {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-navy);
+}
+
+.experienceCompanyTime {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+}
+
+.projectCard {
+    margin-bottom: 40px;
+}
+
+.projectCard > p:first-of-type {
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--color-navy);
+}
+
+.projectCard h4 {
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+
+.projectCard ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.projectCard li {
+    margin-bottom: 8px;
+}
+
+@media screen and (max-width: 900px) {
+    .experienceHighlightsContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .rolesSection,
+    .experienceSection,
+    .projectsSection,
+    .approachSection {
+        padding: 60px 5% 70px;
+    }
+}
+
+
+/*
+Approach Section Layout
+*/
+
+.approachStepsContainer {
     display: flex;
-    flex-direction: column;
+    gap: 4%;
 }
 
-.customerInquirySection {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.approachStepCard {
+    width: 32%;
 }
-
-.customerInquirySubjectSection,
-.customerInquiryBodySection {
-    display: flex;
-    flex-direction: column;
-}
-
-#customerName,
-#customerEmail,
-#customerPhone,
-#customerInquirySubject {
-    height: 30px;
-}
-
-#customerInquiryBody {
-    height: 200px;
-}
-
-.sendMessageButton {
-    align-self: center;
-}
-
 
 
 /*
@@ -440,7 +909,6 @@ Footer Layout
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
 .footerLogoText {
@@ -458,176 +926,38 @@ Footer Layout
 }
 
 
-
-/*
-Background Image and Layout Setup
-*/
-
-html,
-body {
-    height: 100%;
-}
-
-
-body {
-    background-color: #000;
-}
-
-/* Background Image over 600px */
-
-@media screen and (min-width: 600px) {
-
-    body {
-        background-image: url('../img/torontoAtNight.jpg');
-        background-size: cover;
-        background-position: left;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-
-    header,
-    main,
-    footer {
-    background-color: rgba(0, 0, 0, 0.3);
-    }
-
-    .headerContentContainer {
-        background-color: rgba(0, 0, 0, .75);
-    }
-
-    .learnMoreButton {
-        background-color: rgba(0, 0, 0, 0.3);
-    }
-        
-    main > section {
-        background-color: rgba(0, 0, 0, .8);
-    }
-}
-
-@media screen and (max-width: 599px) {
-    
-    main > section {
-        background-color: #2a2a2a;
-    }
-}
-
-/*
-Common Style
-*/
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    color: white;
-}
-
-
-/*
-Header Style
-*/
-
-
-h1 {
-    font-family: 'Goudy Bookletter 1911', serif;
-}
-
-.headingName {
-    font-size: 4rem;
-}
-
-.headingService {
-    font-size: 2.5rem;
-}
-
-header p {
-    font-size: 2rem;
-}
-
-.button {
-    font-size: 2.2rem;
-    text-transform: uppercase;
-}
-
-.button:hover {
-    cursor: pointer;
-}
-
-.contactButton {
-    background-color: #710000;
-}
-
-.contactButton:hover,
-.learnMoreButton:hover {
-    background-color: #980000;
-}
-
-.learnMoreButton {
-    border: 1px solid #710000;
-}
-
-
-/*
-Portfolio Section Style
-*/
-
-.portfolioSiteSection:hover {
-    background-color: rgba(113, 0, 0, 0.5);
-}
-
-
-/*
-Contact Section Style
-*/
-
-.contactSection {
-    font-family: inherit;
-}
-
-#customerName,
-#customerEmail,
-#customerPhone,
-#customerInquirySubject,
-.contactSection label {
-    font-size: 2rem;
-}
-
-#customerInquiryBody {
-    font-size: 1.8rem;
-}
-
-.sendMessageButton {
-    background-color: #710000;
-    color: white;
-    font-family: inherit;
-    border: none;
-}
-
-.sendMessageButton:hover {
-    background-color: #980000;
-}
-
-
 /*
 Footer Style
 */
 
 footer {
-    font-family: 'Goudy Bookletter 1911', serif;
-    background-color: rgba(0, 0, 0, 0.75);
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-hero-bg);
 }
 
 .footerName {
-    font-size: 3rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .footerService {
-    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.footerLogoText {
+    color: var(--color-navy);
+}
+
+.footerLogoContainer {
+    background-color: var(--color-accent);
 }
 
 .footerLogoContainer:hover {
-    background-color: #710000;
+    background-color: var(--color-accent-hover);
     cursor: pointer;
 }
 

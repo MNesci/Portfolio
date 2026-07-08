@@ -11,138 +11,262 @@
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Goudy+Bookletter+1911&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
 
     <!--SEO-->
-    <title>Mike Nesci Web Development</title>
-    <meta name="description" content="Mike Nesci Web Development. I provide web design and web development services. My specialty is making websites for businesses.">
+    <title>Mike Nesci, Technical B2B SaaS Marketer</title>
+    <meta name="description" content="Mike Nesci, Technical B2B SaaS Marketer. I build the systems behind modern B2B marketing—from HubSpot CRM administration and marketing automation to demand generation, technical websites, and analytics.">
 </head>
 <body>
     <header>
         <section class="headerContentContainer">
-            <section class="headerCard">
-                <section class="logoContainer">
-                    <img src="./img/logo2.png" alt="Mike Nesci Web Development logo">
-                </section>
-                <h1>
-                    <span class="headingName">Mike Nesci</span>
-                    <span class="headingService">Web Development</span>
-                </h1>
-            </section>
-            <p>I offer web design and web development services using HTML, CSS, and JavaScript. Let me focus on your website so you can focus on your business.</p>
-            <section class="headerButtonsContainer">
-                <span class="contactButton button">Get in touch</span>
-                <span class="learnMoreButton button">Learn More</span>
-            </section>
+            <div class="headerLeft">
+                <span class="headerLogo" id="heroButton">MIKE NESCI</span>
+            </div>
+            <div class="headerRight">
+                <div class="headerButtonContainer headerRolesButtonContainer" id="rolesButton">
+                    <span>Roles</span>
+                </div>
+                <div class="headerButtonContainer headerExperienceButtonContainer" id="experienceButton">
+                    <span>Experience</span>
+                </div>
+                <div class="headerButtonContainer headerProjectsButtonContainer" id="projectsButton">
+                    <span>Projects</span>
+                </div>
+                <div class="headerButtonContainer headerSkillsButtonContainer" id="approachButton">
+                    <span>Approach</span>
+                </div>
+                <a href="https://www.linkedin.com/in/mike-nesci-5b0255131/" target="_blank" rel="noopener noreferrer" class="headerConnectButtonContainer">
+                    <span>Connect</span>
+                </a>
+            </div>
         </section>
     </header>
     <main>
-        <section class="aboutSection">
-            <section class="aboutTextContainer">
-                <h2>Experience</h2>
-                <p>I have several years of experience managing Ecommerce platforms and developing websites. I design and develop websites that are fully responsive for all screen sizes, have content that supports SEO, have an intuitive UI (user interface), and provide a positive UX (user experience).</p>
-                <p>I have worked with WordPress (WooCommerce) and Shopify, using Microsoft Excel to manage thousands of products. I use HTML5, CSS3, and JavaScript to develop semantic websites with efficient functionality. I use Figma and Adobe Photoshop to design websites and ensure a positive user experience.</p>
-            </section>
-            <section class="aboutImageContainer">
-                <img src="./img/pfp.png" alt="Mike Nesci, web designer, web developer, and ecommerce specialist">
-            </section>
+        <section class="heroSection" id="heroSection">
+            <div class="heroInner">
+                <div class="heroLeft">
+                    <span class="heroEyebrow">B2B Marketing Systems &amp; Strategy</span>
+                    <h1>I'm Mike Nesci, Technical B2B SaaS Marketer</h1>
+                    <p>I build the systems behind modern B2B marketing—from HubSpot CRM administration and marketing automation to demand generation, technical websites, and analytics.</p>
+                    <div class="heroActions">
+                        <a href="#rolesSection" class="heroPrimaryButton">Learn More</a>
+                        <a href="https://www.linkedin.com/in/mike-nesci-5b0255131/" class="heroSecondaryButton" target="_blank" rel="noopener noreferrer">
+                            <span class="heroPlayIcon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </span>
+                            Connect on LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="heroRight">
+                    <div class="heroImageContainer">
+                        <img src="./img/pfp.png" alt="Mike Nesci, Technical B2B SaaS Marketing Professional">
+                    </div>
+                </div>
+            </div>
+            <div class="heroWave" aria-hidden="true">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z" fill="#ffffff"/>
+                </svg>
+            </div>
         </section>
-        <section class="portfolioSection">
-            <h2>Portfolio</h2>
-            <section class="portfolioGalleryContainer">
-                <section class="portfolioSiteSection">
-                    <a href="https://thebrakestore.ca/" target="_blank">
-                        <h3>The Brake Store</h3>
-                        <section class="portfolioImageContainer">
-                            <img src="./img/theBrakeStore.png", alt="The Brake Store website">
-                        </section>
-                        <p>A Shopify Ecommerce platform that is fully responsive, supports SEO, and hosts thousands of skus.</p>
-                    </a>
-                </section>
-                <section class="portfolioSiteSection">
-                    <a href="https://futurabrake.com/" target="_blank">
-                        <h3>Futura Brake</h3>
-                        <section class="portfolioImageContainer">
-                            <img src="./img/futuraBrake.png" alt="Futura Brake website">
-                        </section>
-                        <p>A fully responsive informational website that supports SEO, and has custom JavaScript to enable an image slider.</p>
-                    </a>
-                </section>
-                <section class="portfolioSiteSection">
-                    <a href="https://vincenzaitalianbakery.netlify.app/" target="_blank">
-                        <h3>Vincenza's Italian Bakery</h3>
-                        <section class="portfolioImageContainer">
-                            <img src="./img/vincenzas.png" alt="Vincenza's Italian Bakery website">
-                        </section>
-                        <p>A simple website that is fully responsive, and has content that supports SEO.</p>
-                    </a>
-                </section>
-                <section class="portfolioSiteSection">
-                    <a href="https://ggstatlookup.netlify.app/" target="_blank">
-                        <h3>D&D5e Monster Stats Lookup App</h3>
-                        <section class="portfolioImageContainer">
-                            <img src="./img/statLookup.png" alt="D&D 5e enemy stats lookup website">
-                        </section>
-                        <p>A JavaScript web application that programmatically generates form controls to adjust enemies and balance combat encounters in Dungeons and Dragons Fifth Edition.</p>
-                    </a>
-                </section>
-            </section>
+        <section class="heroBridge">
+            <p class="heroBridgeText">Building scalable marketing systems that drive growth.</p>
+            <p class="heroBridgeText heroBridgeTextRight">Open to opportunities &amp; collaboration.</p>
         </section>
-        <section class="contactSection">
-            <h2>Contact Me</h2>
-            <form class="contactForm" name="contact" method="post" data-netlify="true">
-                <fieldset class="customerInfoSection">
-                    <section class="customerInfoSubsection">
-                        <label for="customerName">Name</label>
-                        <input id="customerName" type="text" name="name" placeholder="Name">
-                    </section>
-                    <section class="customerInfoSubsection">
-                        <label for="customerEmail">Email</label>
-                        <input id="customerEmail" type="email" name="email" placeholder="Email">
-                    </section>
-                    <section class="customerInfoSubsection">
-                        <label for="customerPhone">Phone Number</label>
-                        <input id="customerPhone" type="phone" name="phonenumber" placeholder="123 456 7890">
-                    </section>
-                </fieldset>
-                <fieldset class="customerInquirySection">
-                    <section class="customerInquirySubjectSection">
-                        <label for="customerInquirySubject">Message Subject</label>
-                        <input id="customerInquirySubject" type="text" name="subject" placeholder="Subject">
-                    </section>
-                    <section class="customerInquiryBodySection">
-                        <label for="customerInquiryBody">Message Body</label>
-                        <textarea id="customerInquiryBody" name="body" placeholder="Your Message"></textarea>
-                    </section>
-                </fieldset>
-                <input class="sendMessageButton button" value="Send Message" type="submit">
-            </form>
+        <section class="rolesSection" id="rolesSection">
+            <h2>I help B2B companies build scalable marketing systems that drive growth.</h2>
+            <div class="rolesContainer">
+                <div class="roleCard">
+                    <h3 class="roleCardHeading">Marketing Operations</h3>
+                    <p>Build and optimize HubSpot CRM processes, workflows, lifecycle stages, and properties to improve efficiency and data accuracy.</p>
+                </div>
+                <div class="roleCard">
+                    <h3 class="roleCardHeading">Demand Generation</h3>
+                    <p>Plan and execute data-driven campaigns across Google Ads, landing pages, and content to generate qualified leads.</p>
+                </div>
+                <div class="roleCard">
+                    <h3 class="roleCardHeading">Web Development</h3>
+                    <p>Develop and optimize websites and landing pages using HTML, CSS, JavaScript, HubSpot CMS, HubL, HubDB, and Git.</p>
+                </div>
+                <div class="roleCard">
+                    <h3 class="roleCardHeading">Analytics & Reporting</h3>
+                    <p>Analyze performance across channels, build dashboards, track attribution, and turn data into actionable insights.</p>
+                </div>
+                <div class="roleCard">
+                    <h3 class="roleCardHeading">Technology & AI</h3>
+                    <p>Evaluate solutions and technologies to enhance marketing efforts. Incorporate AI tools, such as ChatGPT and CursorAI, into marketing workflows to improve efficiency.</p>
+                </div>
+                <div class="roleCard">
+                    <h3 class="roleCardHeading">Technical Content Creation</h3>
+                    <p>Create technically accurate content that educates prospects and supports the buyer journey, including blogs, case studies, sales enablement materials, and product-focused resources.</p>
+                </div>
+            </div>
+        </section>
+        <section class="experienceSection" id="experienceSection">
+            <h2>Recent Experience</h2>
+            <div class="experienceHighlightsContainer">
+                <div class="experienceCard">
+                    <h3>Technical Marketing Coordinator</h3>
+                    <div class="experienceCompany">
+                        <div class="experienceCompanyLogoContainer">
+                            <img src="./img/ifw.png" alt="iNTERFACEWARE logo">
+                        </div>
+                        <div class="experienceCompanyText">
+                            <span class="experienceCompanyName">iNTERFACEWARE</span>
+                            <span class="experienceCompanyTime">Nov 2022 – May 2026</span>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Owned HubSpot CRM administration for 5,000+ contacts, including lifecycle management, segmentation, dashboards, and reporting.</li>
+                        <li>Designed and implemented marketing automation workflows that improved lead routing, campaign scalability, and CRM data consistency.</li>
+                        <li>Developed HubSpot CMS websites and marketing resources using HTML, CSS, JavaScript, HubL, HubDB, and Git-based workflows.</li>
+                        <li>Managed Google Ads campaigns, landing pages and conversion tracking, reducing cost per acquisition by approximately 25%.</li>
+                        <li>Partnered with Sales and Customer Solutions teams to improve lead qualification and create technically accurate sales enablement content.</li>
+                        <li>Integrated AI tools into research, content development, technical implementation and workflow optimization to improve team productivity.</li>
+                    </ul>
+                </div>
+                <div class="experienceCard">
+                    <h3>E-Commerce & Digital Marketing Specialist</h3>
+                    <div class="experienceCompany">
+                        <div class="experienceCompanyLogoContainer">
+                            <img src="./img/thebrakestore.webp" alt="The Brake Store logo">
+                        </div>
+                        <div class="experienceCompanyText">
+                            <span class="experienceCompanyName">The Brake Store</span>
+                            <span class="experienceCompanyTime">Mar 2021 – Nov 2022</span>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Managed Google Ads campaigns supporting customer acquisition and revenue growth.</li>
+                        <li>Developed and optimized Shopify e-commerce websites using HTML, CSS, and JavaScript.</li>
+                        <li>Improved website conversion through analytics, experimentation and UX optimization.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="projectsSection" id="projectsSection">
+            <h2>Projects & Initiatives</h2>
+            <div class="projectsContainer">
+                <div class="projectCard">
+                    <h3>Marketing Operations Infrastructure</h3>
+                    <p>Building scalable CRM systems through automation, data architecture, and operational workflows</p>
+                    <h4>Challenge</h4>
+                    <p>As marketing intiatives expanded, the HubSpot CRM for a B2B healthcare interoperability software company needed to support increasingly complex campaigns, sales processes, and reporting requirements. New business needs often required additional data, automation, and reporting capabilities, making it important to build systems that could adapt without increasing manual administrative work.</p>
+                    <h4>Approach</h4>
+                    <p>My focus was on building a CRM foundation that could evolve alongside the business. Rather than solving each operational request independently, I looked for opportunities to create reusable systems that improved data consistency, reduced manual effort, and supported future marketing initiatives. Whenever Marketing or Sales identified a new operational requirement, I evaluated how it could be incorporated into the CRM through custom properties, workflows, automation, or reporting rather than introducing additional manual processes. I viewed the CRM as shared operational infrastructure, designing solutions that could be reused across multiple campaigns and processes rather than addressing individual requests in isolation.</p>
+                    <h4>Key Decisions</h4>
+                    <ul>
+                        <li>Designed and managed custom HubSpot properties to support segmentation, reporting, and automation</li>
+                        <li>Built automation workflows to manage contact propertices, lifecycle data, segmentation, and outreach</li>
+                        <li>Created workflows to maintain object associations and improve the integrity of relationships between contacts, companies, and deals</li>
+                        <li>Developed automated notifications and follow-up tasks based on important customer activity, ensuring Sales could respond quickly to high-value engagement</li>
+                        <li>Created new CRM properties and supporting workflows during a Pipedrive migration to preserve historical CRM data and maintain reporting continuity</li>
+                        <li>Exported and analyzed CRM data to support reporting, operational decisions, and ongoing process improvements</li>
+                    </ul>
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Built a scalable CRM foundation capable of supporting evolving marketing initiatives</li>
+                        <li>Reduced manual administration work through automation and standardized CRM processes</li>
+                        <li>Improved data consistency and reporting across contacts, companies, and deals</li>
+                        <li>Enabled faster Sales response through automated notifications and task management</li>
+                        <li>Created reusable systems that simplified future marketing operations and CRM enhancements</li>
+                        <li>Improved visibility into CRM and marketing performance through standardized reporting and data management</li>
+                    </ul>
+                </div>
+                <div class="projectCard">
+                    <h3>Lead Qualification & Segmentation Framework</h3>
+                    <p>Building a smarter lead qualification system through automation, behavioiural segmentation, and sales feedback</p>
+                    <h4>Challenge</h4>
+                    <p>The existing lead scoring process for a B2B healthcare interoperability software company relied primarily on standard engagement metrics, providing limited insight into which leads represented the strongest sales opportunities. As marketing campaigns expanded and inbound volume increased, it became increasingly important to identify higher quality opportunities and provide Sales with more meaningful context around each lead.</p>
+                    <h4>Approach</h4>
+                    <p>Rather than relying exclusively on quantitative engagement metrics, I wanted the framework to incorporate qualitative insights from Sales alongside behavioural data captured in HubSpot. I had seen some of this information captured in our CRM when investigating leads, and had heard useful feedback from Sales when discussing specific leads. My goal was to create a framework that could evolve over time by combining CRM automation with insights gathered directly from Sales. This meant treating lead scoring as an iterative process rather than a fixed model, continuously refining it as new patterns emerged.</p>
+                    <h4>Key Decisions</h4>
+                    <ul>
+                        <li>Designed and built automated workflows in HubSpot to segment contacts by website behaviour, campaign source, lifecycle stage, and demonstrated product interest</li>
+                        <li>Developed behavioural segments that provided Sales with richer context around lead intent</li>
+                        <li>Analyzed qualitative Sales notes using AI tools to identify recurring patterns in customer fit, use cases, and buying intent</li>
+                        <li>Collaborated with Sales to continuously refine segmentation logic based on real customer conversations and evolving qualification criteria</li>
+                    </ul>
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Built a scalable lead qualification framework that combined behavioural, lifecycle, and qualitative sales signals</li>
+                        <li>Improved visibility into lead intent through behavioural segmentation</li>
+                        <li>Better aligned Marketing and Sales regarding lead qualification</li>
+                        <li>Created a repeatable process for refining lead scoring using both quantitative and qualitative data</li>
+                    </ul>
+                </div>
+                <div class="projectCard">
+                    <h3>Google Ads Overhaul and Optimization</h3>
+                    <p>Reducing acquisition cost while improving lead quality</p>
+                    <h4>Challenge</h4>
+                    <p>I took ownership of the Google Ads program for a B2B healthcare interoperability software company. Paid search was an important lead generation channel, but the account had evolved over time without a consistent structure, resulting in high acquisition costs and making ongoing optimization difficult.</p>
+                    <h4>Approach</h4>
+                    <p>I began by auditing the account structure to identify opportunities across keyword targeting, ad relevance, landing page experience, and conversion measurement. Rather than making broad changes all at once, I prioritized incremental improvements and continuously evaluated performance before moving to the next optimization cycle. This iterative approach made it possible to build on successful changes while minimizing unnecessary risk.</p>
+                    <h4>Key Decisions</h4>
+                    <ul>
+                        <li>Reorganized campaigns around user intent and search intent</li>
+                        <li>Refined keyword targeting to prioritize higher-intent searches</li>
+                        <li>Optimized ad copy, landing pages, and conversion tracking through iterative testing</li>
+                    </ul>
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Reduced cost per acquisition by approximately 25%</li>
+                        <li>Improved the relevance and quality of inbound leads through more targeted keyword selection and campaign structure.</li>
+                        <li>Organized campaigns for better maintainability and ongoing optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="approachSection" id="approachSection">
+            <h2>How I Tackle Problems</h2>
+            <div class="approachStepsContainer">
+                <div class="approachStepCard">
+                    <div class="approachStepHeader">
+                        <div class="approachStepLogoContainer">
+                            <img>
+                        </div>
+                        <h3>Understand</h3>
+                    </div>
+                    <p>I assess the situation to understand the business problem or pain point, evaluating current solutions to determine how effective they are and why.</p>
+                </div>
+                <div class="approachStepCard">
+                    <div class="approachStepHeader">
+                        <div class="approachStepLogoContainer">
+                            <img>
+                        </div>
+                        <h3>Build</h3>
+                    </div>
+                    <p>I design a system or campaign that will address the underlying issue, then I implement it.</p>
+                </div>
+                <div class="approachStepCard">
+                    <div class="approachStepHeader">
+                        <div class="approachStepLogoContainer">
+                            <img>
+                        </div>
+                        <h3>Iterate</h3>
+                    </div>
+                    <p>I analyze the performance of my solution, testing to determine where it succeeded and where it didn't. I document these findings to inform the next step, and continue the optimization process.</p>
+                </div>
+            </div>
         </section>
     </main>
     <footer>
         <section class="footerContentContainer">
             <section class="footerStackRow">
-                <section class="footerLogoContainer">
-                    <section class="footerCard" href="./index.html">
-                        <section class="logoContainer">
-                            <img src="./img/logo2.png" alt="Mike Nesci Web Development logo">
-                        </section>
-                        <section class="footerLogoText">
-                            <span class="footerName">Mike Nesci</span>
-                            <span class="footerService">Web Development</span>
-                        </section>
+                <section class="footerCard">
+                    <section class="footerText">
+                        <span class="footerName">Mike Nesci</span>
                     </section>
                 </section>
             </section>
             <section class="footerStackRow">
-                <a href="https://github.com/MNesci" class="footerLogoContainer socialIconContainer">
+                <a href="https://github.com/MNesci" target="_blank" rel="noopener noreferrer" class="footerLogoContainer socialIconContainer">
                     <img src="./img/githubIcon.png" alt="github icon">
                 </a>
-                <a href="https://www.linkedin.com/in/mike-nesci-5b0255131/" class="footerLogoContainer socialIconContainer">
+                <a href="https://www.linkedin.com/in/mike-nesci-5b0255131/" target="_blank" rel="noopener noreferrer" class="footerLogoContainer socialIconContainer">
                     <img src="./img/linkedinIcon.png" alt="linkedin icon">
-                </a>
-                <a href="https://twitter.com/MikeNesci1" class="footerLogoContainer socialIconContainer">
-                    <img src="./img/twitterIcon.png" alt="twitter icon">
                 </a>
             </section>
         </section>
