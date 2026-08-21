@@ -824,6 +824,11 @@ Experience Section Layout
     color: var(--color-text-muted);
 }
 
+.projectsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .projectCard {
     margin-bottom: 40px;
 }
@@ -869,6 +874,8 @@ Approach Section Layout
 .approachStepsContainer {
     display: flex;
     gap: 4%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .approachStepCard {
