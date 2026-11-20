@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover how Dexios brought radiology billing integrations in-house with Iguana, reducing integration costs by 50–57% and onboarding time by 90%.">
+  <title>Dexios Case Study | Radiology Billing Integration with Iguana</title>
+  <style>
+    :root { --navy:#091e3a; --navy2:#0d4269; --blue:#2590cd; --green:#5cb533; --ink:#18344d; --muted:#587085; --pale:#eff7fc; --line:#dce9f1; --white:#fff; }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; color:var(--ink); background:white; line-height:1.7; }
+    a { color:#1479b5; }
+    .wrap { max-width:1190px; margin:auto; padding:0 30px; }
+    .eyebrow { font-size:.76rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:#167cb5; }
+    .hero { overflow:hidden; position:relative; background:radial-gradient(circle at 100% 0%, #d3edfd 0, transparent 40%), linear-gradient(130deg,#f5fbff,#eaf5fc 70%,#f6fbfe); padding:86px 0 75px; }
+    .hero::after { content:""; position:absolute; width:500px; height:500px; border:1px solid #cce7f8; border-radius:50%; right:-260px; top:-320px; pointer-events:none; }
+    .hero h1 { font-size:clamp(2.3rem,4.5vw,4.25rem); letter-spacing:-.045em; line-height:1.12; max-width:920px; color:var(--navy); margin:16px 0 22px; }
+    .hero h1 span { color:#167eb9; }
+    .hero p { font-size:1.19rem; max-width:790px; color:#47657a; margin:0 0 30px; }
+    .tags { display:flex; gap:9px; flex-wrap:wrap; }
+    .tag { border:1px solid #c9e3f1; background:#fff; padding:6px 12px; border-radius:30px; color:#245675; font-size:.79rem; font-weight:650; }
+    .metric-panel { margin-top:-24px; position:relative; z-index:1; }
+    .metrics { display:grid; grid-template-columns:repeat(3,1fr); background:white; box-shadow:0 20px 60px #153f6020; border:1px solid var(--line); border-radius:18px; overflow:hidden; }
+    .metric { padding:32px 34px; border-right:1px solid var(--line); }
+    .metric:last-child { border:0; }
+    .metric strong { display:block; font-size:clamp(2.2rem,3.4vw,3.5rem); line-height:1.12; color:var(--navy); letter-spacing:-.05em; }
+    .metric strong em { color:var(--green); font-style:normal; }
+    .metric b { display:block; font-size:.99rem; margin-top:9px; }
+    .metric small { display:block; color:var(--muted); font-size:.86rem; line-height:1.5; margin-top:5px; }
+    .main { display:grid; grid-template-columns:235px minmax(0,1fr); gap:70px; padding-top:80px; padding-bottom:90px; }
+    .toc { align-self:start; position:sticky; top:30px; border-left:2px solid #d7e7f1; padding:8px 0 8px 18px; }
+    .toc .eyebrow { display:block; margin-bottom:12px; }
+    .toc a { display:block; color:#526b7d; font-size:.87rem; padding:6px 0; text-decoration:none; line-height:1.45; }
+    .toc a:hover { color:var(--blue); }
+    article section { scroll-margin-top:30px; margin-bottom:75px; }
+    article h2 { font-size:clamp(1.8rem,2.6vw,2.55rem); line-height:1.2; letter-spacing:-.035em; color:var(--navy); margin:0 0 21px; }
+    article h3 { font-size:1.24rem; line-height:1.3; color:var(--navy); margin:31px 0 10px; }
+    article p { margin:0 0 17px; }
+    .lead { font-size:1.12rem; color:#405d72; }
+    .overview { background:#f3f9fd; border:1px solid #dcecf5; border-radius:17px; padding:30px; }
+    .overview h2 { font-size:1.55rem; margin-bottom:12px; }
+    .four-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:20px; }
+    .mini { padding:22px; border:1px solid #dceaf2; border-radius:13px; background:white; }
+    .mini b { display:block; color:var(--navy); margin-bottom:7px; }
+    .mini p { font-size:.9rem; line-height:1.6; margin:0; }
+    .issues { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; margin:25px 0; }
+    .issue { border:1px solid var(--line); border-radius:13px; padding:23px; background:#fff; }
+    .issue .num { display:inline-grid; place-items:center; width:34px; height:34px; border-radius:10px; color:#127fb7; background:#eaf6fc; font-weight:800; margin-bottom:11px; }
+    .issue h3 { margin:0 0 7px; font-size:1.03rem; }
+    .issue p { margin:0; font-size:.92rem; }
+    .workflow { border:1px solid #d5e8f2; border-radius:18px; background:linear-gradient(180deg,#f3faff,#fff); padding:27px; margin:30px 0; }
+    .workflow .eyebrow { margin-bottom:16px; }
+    .flow { display:grid; grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr) 44px minmax(0,1fr); gap:9px; align-items:center; }
+    .flow-card { min-height:192px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; border-radius:13px; border:1px solid #c9e0ef; background:#fff; padding:18px 12px; }
+    .flow-card.iguana { border:2px solid #66c84c; background:#f1fbef; }
+    .flow-card svg { width:39px; height:39px; margin-bottom:11px; stroke:#2186bd; stroke-width:1.7; fill:none; }
+    .flow-card b { color:var(--navy); font-size:1.05rem; }
+    .flow-card span { font-size:.76rem; line-height:1.5; color:#587184; margin-top:7px; }
+    .flow-card .iguana-name { font-size:1.65rem; font-weight:800; letter-spacing:-.04em; color:#103966; }
+    .arrow { text-align:center; color:#2188c4; font-size:2.1rem; font-weight:700; }
+    .flow-note { margin:16px 0 0 !important; font-size:.85rem; color:#526d81; text-align:center; }
+    .tech-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-top:18px; }
+    .tech { background:#f2f8fc; border:1px solid #deebf3; border-radius:12px; padding:19px; }
+    .tech h3 { margin:0 0 8px; font-size:.9rem; color:#1378b0; text-transform:uppercase; letter-spacing:.06em; }
+    .tech p { margin:0; font-size:.89rem; }
+    .result-list { display:grid; gap:15px; margin:23px 0; }
+    .result { display:grid; grid-template-columns:115px 1fr; align-items:center; gap:23px; border:1px solid var(--line); border-radius:13px; padding:23px; }
+    .result .big { color:#1284bc; font-size:2rem; line-height:1.1; letter-spacing:-.05em; font-weight:800; }
+    .result h3 { margin:0 0 4px; font-size:1.05rem; }
+    .result p { margin:0; font-size:.93rem; }
+    blockquote { margin:32px 0; padding:35px 38px; background:var(--navy); color:#fff; border-radius:16px; position:relative; }
+    blockquote::before { content:'“'; position:absolute; font:100px Georgia,serif; color:#4eafd9; opacity:.5; right:27px; top:-20px; }
+    blockquote p { position:relative; font-size:1.16rem; line-height:1.75; }
+    blockquote cite { font-size:.9rem; font-style:normal; color:#b9dfef; font-weight:700; }
+    .next { background:#f2f9fc; border-radius:15px; padding:25px 29px; }
+    .next p:last-child { margin-bottom:0; }
+    .about { border-top:1px solid var(--line); padding-top:24px; }
+    .about p { font-size:.95rem; }
+    @media(max-width:900px) { .main { grid-template-columns:1fr; gap:30px; } .toc { position:static; display:flex; gap:10px 18px; flex-wrap:wrap; border-left:0; border-bottom:1px solid var(--line); padding:0 0 18px; } .toc .eyebrow { width:100%; margin:0; } .toc a { padding:0; } .metrics { grid-template-columns:repeat(3,1fr); } .metric { padding:23px; } }
+    @media(max-width:650px) { .wrap { padding:0 20px; } .hero { padding:58px 0 60px; } .hero p { font-size:1.04rem; } .metrics,.four-grid,.issues,.tech-grid { grid-template-columns:1fr; } .metric { border-right:0; border-bottom:1px solid var(--line); } .metric:last-child { border-bottom:0; } .main { padding-top:55px; } .flow { grid-template-columns:1fr; } .arrow { transform:rotate(90deg); line-height:1; padding:4px; } .flow-card { min-height:145px; } .result { grid-template-columns:1fr; gap:8px; } blockquote { padding:29px 24px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="wrap">
+        <div class="eyebrow">Iguana / Customer case study</div>
+        <h1 id="page-title">Revolutionizing Radiology Billing: <span>How Dexios Achieved Integration Autonomy with Iguana</span></h1>
+        <p>Discover how Dexios brought radiology interfaces in-house, reduced integration costs, and dramatically accelerated client onboarding with Iguana.</p>
+        <div class="tags"><span class="tag">Radiology medical billing</span><span class="tag">In-house integration</span><span class="tag">Interface cost savings</span><span class="tag">RIS integration</span></div>
+      </div>
+    </section>
+    <div class="wrap metric-panel" aria-label="Case study results">
+      <div class="metrics">
+        <div class="metric"><strong>50–57<em>%</em></strong><b>Lower integration costs</b><small>From $6,000–$7,000 per interface to approximately $3,000</small></div>
+        <div class="metric"><strong>90<em>%</em></strong><b>Faster client onboarding</b><small>Reduced from more than three months to 5–10 days</small></div>
+        <div class="metric"><strong>75<em>%</em></strong><b>Faster data-issue resolution</b><small>From 1–2 months to 1–2 weeks, as reported in the case study</small></div>
+      </div>
+    </div>
+    <div class="wrap main">
+      <nav class="toc" aria-label="On this page"><span class="eyebrow">In this case study</span><a href="#overview">At a glance</a><a href="#challenges">The challenges</a><a href="#solution">Solution: Iguana</a><a href="#workflow">Integration workflow</a><a href="#results">Business results</a><a href="#testimonial">Customer perspective</a><a href="#future">Looking ahead</a><a href="#about">About Dexios</a></nav>
+      <article>
+        <section id="overview" class="overview">
+          <h2>Dexios at a glance</h2>
+          <p>Dexios, an award-winning radiology billing company, delivers customized solutions to optimize clients’ billing processes and maximize revenue for the services they perform.</p>
+          <div class="four-grid">
+            <div class="mini"><b>01 / Client overview</b><p>Dexios specializes in radiology billing for hospitals, radiology groups, and imaging centers.</p></div>
+            <div class="mini"><b>02 / Integration bottlenecks</b><p>Third-party integration services created delays, high costs, and complex onboarding.</p></div>
+            <div class="mini"><b>03 / Success with Iguana</b><p>Dexios brought integrations in-house and gained direct control over its clients’ interfaces.</p></div>
+            <div class="mini"><b>04 / Business impact</b><p>Faster onboarding, reduced integration costs, and more efficient internal data handling.</p></div>
+          </div>
+        </section>
+        <section id="challenges">
+          <div class="eyebrow">The problem</div>
+          <h2>Third-party interfaces were slowing down client service</h2>
+          <p class="lead">Ensuring proper reimbursement for radiology services demands specialized knowledge. Dexios helps hospitals, radiology groups, and imaging centers save time and money through accurate billing and regulatory compliance.</p>
+          <p>Before Iguana, Dexios depended on an external third-party integration service to manage interfaces between client systems and the ImagineSoftware billing platform for claims processing. Without direct control, the team encountered four persistent challenges.</p>
+          <div class="issues">
+            <div class="issue"><span class="num">01</span><h3>High deployment costs</h3><p>Each new interface could cost as much as $7,000.</p></div>
+            <div class="issue"><span class="num">02</span><h3>Significant wait times</h3><p>New interfaces could take up to 90 days, with minor updates delayed by three to four weeks.</p></div>
+            <div class="issue"><span class="num">03</span><h3>Complex onboarding</h3><p>Acting as an intermediary between clients and the external integration service added unnecessary complications.</p></div>
+            <div class="issue"><span class="num">04</span><h3>Limited troubleshooting visibility</h3><p>A lack of searchable interface logs made it harder to investigate and resolve data issues.</p></div>
+          </div>
+          <p>These bottlenecks prompted Dexios to look for an in-house solution that would restore direct control over integration processes.</p>
+        </section>
+        <section id="solution">
+          <div class="eyebrow">The solution</div>
+          <h2>Bringing radiology integrations in-house with Iguana</h2>
+          <p>Dexios needed an integration engine that combined control with the flexibility to connect a diverse range of radiology systems. Iguana offered a balance of cost-efficiency, a user-friendly interface, and comprehensive documentation.</p>
+          <p>The iNTERFACEWARE team supported the transition through on-site training, integration expertise, ongoing education, and support. This prepared Dexios to manage its interfaces independently.</p>
+          <h3>Iguana in action: streamlined workflows for radiology claims processing</h3>
+          <p>Dexios now connects with hospitals, imaging centers, and Radiology Information Systems (RIS) including Powerscribe, EPIC, Medinformatix, Fuji, Cerner, CPSI, eRAD, and Ensemble. Interfaces capture demographics and results messages from these systems, then Iguana transforms the data into standardized HL7 messages for the ImagineSoftware billing system.</p>
+          <div class="workflow" id="workflow" aria-label="Radiology billing integration workflow">
+            <div class="eyebrow">How the integration works</div>
+            <div class="flow">
+              <div class="flow-card">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="7" width="36" height="34" rx="4"/><path d="M6 17h36M16 12h8M12 24h9M12 31h16M29 24h8M31 31h6"/></svg>
+                <b>Radiology systems</b><span>RIS, hospitals and imaging centers<br>ADT / ORU, CSV, text</span>
+              </div>
+              <div class="arrow" aria-hidden="true">→</div>
+              <div class="flow-card iguana">
+                <div class="iguana-name">Iguana</div><b>Integration Engine</b><span>Ingest · Filter · Transform<br>LLP / SFTP</span>
+              </div>
+              <div class="arrow" aria-hidden="true">→</div>
+              <div class="flow-card">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="15" width="34" height="27" rx="4"/><path d="M17 15V8h14v7M14 25h20M14 32h12"/></svg>
+                <b>ImagineSoftware</b><span>Billing system<br>Standardized HL7 messages</span>
+              </div>
+            </div>
+            <p class="flow-note">Illustrative workflow recreated from the integration diagram in the case study.</p>
+          </div>
+          <div class="tech-grid">
+            <div class="tech"><h3>Systems</h3><p>Nuance PowerScribe, EPIC, Medinformatix, FujiFilm, Cerner, CPSI, eRAD, Ensemble</p></div>
+            <div class="tech"><h3>Data formats</h3><p>HL7 ADT, HL7 ORU, CSV, plain text, delimited text</p></div>
+            <div class="tech"><h3>Connections</h3><p>LLP and SFTP</p></div>
+          </div>
+        </section>
+        <section id="results">
+          <div class="eyebrow">The results</div>
+          <h2>Measurable improvements in cost, speed, and control</h2>
+          <p>Implementing Iguana in-house helped Dexios improve radiology billing operations and serve new clients more efficiently.</p>
+          <div class="result-list">
+            <div class="result"><div class="big">50–57%</div><div><h3>Reduced interface costs</h3><p>New integration expenses fell from $6,000–$7,000 per interface to approximately $3,000 on average.</p></div></div>
+            <div class="result"><div class="big">90%</div><div><h3>Faster deployments</h3><p>New-client onboarding fell from more than three months to just 5–10 days.</p></div></div>
+            <div class="result"><div class="big">~1 hour</div><div><h3>Direct interface management</h3><p>Dexios could complete interface modifications and updates within an hour instead of waiting weeks.</p></div></div>
+            <div class="result"><div class="big">75%</div><div><h3>Improved troubleshooting</h3><p>The case study reports that resolving data issues was reduced from 1–2 months to 1–2 weeks.</p></div></div>
+          </div>
+          <p>By quickly building interfaces tailored to diverse client specifications, Dexios reduced costs while improving service delivery and client satisfaction.</p>
+        </section>
+        <section id="testimonial">
+          <div class="eyebrow">Customer perspective</div>
+          <h2>What Dexios says about Iguana</h2>
+          <blockquote><p>“The iNTERFACEWARE team has been an excellent partner in enhancing our interface capabilities. Through onboarding, training, conferences, and support, they have consistently delivered exceptional service. With Iguana, we have achieved a 90% reduction in interface setup time for new clients and are now able to troubleshoot data issues within hours instead of weeks.”</p><cite>— Nicolas Pratt, Director of Information Systems</cite></blockquote>
+        </section>
+        <section id="future">
+          <div class="eyebrow">Looking ahead</div>
+          <h2>Extending Iguana beyond radiology billing</h2>
+          <p>In addition to streamlining client radiology interfaces, Dexios uses Iguana for internal processes, opening up new opportunities for operational efficiency.</p>
+          <div class="next"><h3>Internal data transformation</h3><p>Dexios built an Iguana interface to convert large CSV datasets into the format required by an external database, saving its internal team hundreds of hours.</p><h3>Future expansion plans</h3><p>Dexios plans to build Google Workspace integrations to improve internal reporting and explore AI-assisted interface development to accelerate future integration work.</p></div>
+        </section>
+        <section id="about" class="about">
+          <div class="eyebrow">About the customer</div>
+          <h2>About Dexios</h2>
+          <p>Dexios is a national, radiology-specific billing company that has won multiple awards for its work. It provides tailored radiology billing and coding solutions, focusing on maximizing appropriate reimbursement for its clients through attentive, ethical service.</p>
+          <p>Dexios states that its clients rank in the top 10% nationally for billing performance, and its mission is to provide comprehensive billing and coding services to radiology groups across the country.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

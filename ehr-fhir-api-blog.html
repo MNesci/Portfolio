@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A technical guide to connecting EHR systems using FHIR APIs in Iguana, including authentication, vendor adapters, configuration, and monitoring.">
+  <title>Connecting to EHR Systems Using FHIR APIs in Iguana | iNTERFACEWARE</title>
+  <style>
+    /* Brand tokens informed by iNTERFACEWARE's original styles. */
+    :root {
+      --navy: #091e3a;
+      --blue: #2590cd;
+      --blue-dark: #00609f;
+      --blue-pale: #e5f3fa;
+      --ink: #253447;
+      --muted: #617183;
+      --border: #dce7ee;
+      --surface: #f5f9fc;
+      --green: #5cb533;
+      --shadow: 0 14px 45px rgba(9,30,58,.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); font: 16px/1.75 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #fff; }
+    a { color: var(--blue-dark); text-underline-offset: 3px; }
+    a:hover { color: var(--blue); }
+    img { max-width: 100%; }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -.025em; color: var(--navy); }
+    h1 { font-size: clamp(2.2rem, 4vw, 3.8rem); margin: 0 0 22px; }
+    h2 { font-size: clamp(1.55rem, 2.2vw, 2.05rem); margin: 0 0 18px; }
+    h3 { font-size: 1.14rem; margin: 0 0 13px; }
+    p { margin: 0 0 19px; }
+    ul { padding-left: 22px; margin: 14px 0 24px; }
+    li { padding-left: 4px; margin: 8px 0; }
+    .shell { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    /* Article hero: editorial heading above a responsive, accessible workflow. */
+    .article-hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(120deg, #f4faff 0%, #e9f6ff 62%, #d8efff 100%);
+      padding: 66px 0 76px;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-hero::before {
+      content: "";
+      position: absolute;
+      width: 850px;
+      height: 850px;
+      right: -370px;
+      top: -630px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.42);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block;
+      color: var(--blue-dark);
+      font-size: .83rem;
+      font-weight: 800;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+      margin-bottom: 29px;
+    }
+    .eyebrow::after {
+      content: "";
+      display: block;
+      width: 66px;
+      height: 4px;
+      margin-top: 12px;
+      border-radius: 5px;
+      background: var(--blue);
+    }
+    .article-hero h1 { max-width: 980px; margin-bottom: 24px; }
+    .lead { max-width: 920px; color: #435b74; font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.7; }
+    .workflow {
+      margin: 42px 0 0;
+      padding: 28px 30px 33px;
+      background: rgba(255,255,255,.95);
+      border: 1px solid #e3eff8;
+      border-radius: 23px;
+      box-shadow: 0 20px 55px rgba(20,83,135,.11);
+    }
+    .workflow figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px; margin-bottom: 27px; line-height: 1.45; }
+    .workflow-label { color: var(--blue-dark); font-size: .8rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .workflow-description { color: #486079; font-size: .95rem; }
+    .workflow-steps { display: grid; grid-template-columns: minmax(0,1fr) 70px minmax(0,1.38fr) 42px minmax(0,.85fr) 42px minmax(0,1fr); align-items: center; gap: 7px; }
+    .workflow-node { min-width: 0; min-height: 205px; border: 1.5px solid #b8d9f2; border-radius: 18px; background: linear-gradient(145deg,#fff,#f1f9ff); padding: 19px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; }
+    .workflow-node h3 { margin: 0; font-size: clamp(.91rem, 1.5vw, 1.15rem); line-height: 1.3; color: var(--navy); }
+    .workflow-node p { margin: 0; font-size: .76rem; line-height: 1.45; color: #4a6177; }
+    .workflow-icon { width: 51px; height: 51px; color: #127ac4; stroke-width: 1.7; }
+    .fhir-logo { display: block; width: 150px; max-width: 100%; height: auto; flex-shrink: 0; object-fit: contain; }
+    .workflow-tag { padding: 4px 11px; border-radius: 999px; background: #d4ebfd; color: #064b86; font-size: .85rem; font-weight: 750; white-space: nowrap; }
+    .workflow-node.iguana { background: linear-gradient(135deg,#f3fff0,#e6f8e8); border: 2px solid #54bd47; }
+    .workflow-node.iguana h3 { font-size: 1.5rem; }
+    .workflow-node.iguana > p { font-weight: 650; color: #254b39; }
+    .conversion { display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 10px; }
+    .format { padding: 10px 9px; border: 1.5px solid #4b9fe6; border-radius: 9px; color: #075c9e; background: #fff; font-weight: 750; font-size: .78rem; line-height: 1.3; }
+    .format.fhir { border-color: #8052c7; color: #6539a7; }
+    .convert-arrow { color: #29a54b; font-size: 1.5rem; font-weight: 800; }
+    .workflow-connector { display: flex; flex-direction: column; align-items: center; gap: 9px; color: #0872b5; }
+    .workflow-connector span { color: #fff; background: #087dc8; border-radius: 999px; font-size: .72rem; font-weight: 750; padding: 4px 9px; white-space: nowrap; }
+    .workflow-connector svg { width: 100%; height: 22px; overflow: visible; }
+    .workflow-connector line, .workflow-connector path { stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    @media (max-width: 850px) {
+      .workflow { padding: 24px; }
+      .workflow-steps { grid-template-columns: 1fr; gap: 6px; }
+      .workflow-node { min-height: 130px; padding: 16px; }
+      .workflow-connector { height: 40px; justify-content: center; gap: 0; }
+      .workflow-connector svg { height: 26px; width: 44px; transform: rotate(90deg); }
+      .workflow-connector span { position: absolute; margin-left: 120px; }
+      .workflow-node.iguana { min-height: 165px; }
+    }
+    @media (max-width: 620px) {
+      .article-hero { padding: 42px 0 50px; }
+      .workflow { margin-top: 28px; padding: 18px 15px; border-radius: 17px; }
+      .workflow figcaption { margin-bottom: 18px; }
+      .workflow-description { font-size: .85rem; }
+      .article-hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+    }
+    .article-layout { display: grid; grid-template-columns: 215px minmax(0, 1fr); gap: 70px; padding-top: 66px; padding-bottom: 100px; }
+    .toc { align-self: start; position: sticky; top: 30px; font-size: .84rem; }
+    .toc-heading { font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-size: .72rem; margin-bottom: 16px; }
+    .toc a { display: block; padding: 8px 12px; border-left: 2px solid var(--border); text-decoration: none; color: #536779; line-height: 1.4; }
+    .toc a:hover { color: var(--blue-dark); border-color: var(--blue); background: var(--surface); }
+    .article { min-width: 0; }
+    .article-section { margin-bottom: 65px; scroll-margin-top: 35px; }
+    .article-section > h2 { color: var(--blue-dark); }
+    .intro-panel { padding: 28px 32px; border-left: 4px solid var(--blue); background: var(--surface); border-radius: 0 12px 12px 0; margin-bottom: 55px; }
+    .intro-panel h2 { margin-bottom: 13px; }
+    .intro-panel p:last-child { margin-bottom: 0; }
+    .content-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 26px; box-shadow: var(--shadow); }
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; margin: 24px 0; }
+    .content-card h3 { color: var(--blue-dark); }
+    .content-card ul { margin-bottom: 0; }
+    .callout { background: #eff8fd; border-radius: 12px; padding: 22px 26px; margin: 26px 0; border: 1px solid #d7ebf6; }
+    .callout p:last-child { margin-bottom: 0; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; margin: 24px 0; }
+    table { border-collapse: collapse; width: 100%; min-width: 590px; font-size: .9rem; line-height: 1.55; }
+    th { background: #eaf4fa; color: var(--navy); text-align: left; font-weight: 750; }
+    th, td { padding: 17px 19px; vertical-align: top; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { font-weight: 700; color: var(--navy); }
+    tbody tr:nth-child(even) { background: #fbfdff; }
+    .list-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin: 25px 0; }
+    .list-grid > div { padding: 17px 19px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+    .list-grid strong { display: block; color: var(--navy); margin-bottom: 4px; }
+    .list-grid p { font-size: .91rem; line-height: 1.55; margin: 0; }
+    .next { background: linear-gradient(120deg, var(--navy), #0b4775); border-radius: 16px; color: #e4f3fc; padding: 35px 38px; }
+    .next h2 { color: #fff; }
+    .next a { color: #fff; font-weight: 750; }
+    .next p { max-width: 68ch; }
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; gap: 24px; }
+      .toc { position: static; display: flex; flex-wrap: wrap; gap: 6px; }
+      .toc-heading { width: 100%; margin-bottom: 5px; }
+      .toc a { border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; }
+    }
+    @media (max-width: 620px) {
+      .shell { padding: 0 20px; }
+      .article-hero { padding: 44px 0; }
+      .article-layout { padding-top: 35px; padding-bottom: 60px; }
+      .two-col, .list-grid { grid-template-columns: 1fr; }
+      .intro-panel, .content-card { padding: 20px; }
+      .next { padding: 26px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <!-- Article only: intentionally no site header, footer, or FAQ. -->
+  <main>
+    <section class="article-hero" aria-labelledby="article-title">
+      <div class="shell hero-content">
+        <div class="eyebrow">Guide to HL7 / FHIR</div>
+        <h1 id="article-title">Connecting to EHR Systems Using FHIR APIs in Iguana</h1>
+        <p class="lead">Integrating with enterprise EHR systems involves more than simple RESTful calls. While FHIR provides a consistent standard for exchanging healthcare data, production EHR APIs introduce additional requirements for registration, authentication, and vendor-specific conventions.</p>
+
+        <figure class="workflow" aria-label="Example one-way integration: a patient admission HL7 message travels through an LLP feed to Iguana, is transformed into FHIR JSON, and is sent through a FHIR API to an EHR system.">
+          <figcaption>
+            <span class="workflow-label">Example workflow</span>
+            <span class="workflow-description">Send a patient admission to an EHR using a FHIR API</span>
+          </figcaption>
+          <div class="workflow-steps">
+            <div class="workflow-node">
+              <svg class="workflow-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" aria-hidden="true"><rect x="7" y="9" width="50" height="37" rx="5"/><path d="M24 55h16M32 46v9M32 18v20M22 28h20" stroke-width="4"/></svg>
+              <h3>Patient Admission</h3>
+              <span class="workflow-tag">ADT^A01</span>
+            </div>
+            <div class="workflow-connector"><span>LLP Feed</span><svg viewBox="0 0 80 22" aria-hidden="true"><line x1="1" y1="11" x2="72" y2="11"/><path d="M62 2l10 9-10 9"/></svg></div>
+            <div class="workflow-node iguana">
+              <h3>Iguana</h3>
+              <p>Integration Engine</p>
+              <div class="conversion"><span class="format">HL7<br>(v2)</span><span class="convert-arrow" aria-hidden="true">→</span><span class="format fhir">FHIR<br>(JSON)</span></div>
+            </div>
+            <div class="workflow-connector"><svg viewBox="0 0 80 22" aria-hidden="true"><line x1="1" y1="11" x2="72" y2="11"/><path d="M62 2l10 9-10 9"/></svg></div>
+            <div class="workflow-node">
+              <!-- Official FHIR logo supplied for this page, embedded to work offline. -->
+              <img class="fhir-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAC6CAYAAAAUNXCfAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABLKADAAQAAAABAAAAugAAAABNeoPyAAAeiElEQVR4Ae2de4wbx33HZ3a5JO8pnuWH5FdoW4ofsuNzXk3TJKKQF5Ai8LkN+gZ8StF/WrSSUPQVpJCEFE2AopAE5K+gxZ2RPoK+LKd/xG3SiE6RR5umZho7VmPZpl3bZ8mSj5LuSXJ3+v0tueRyybvj2bwj7/gdYDS7s7Ozsx/u/fSb3/xmRikGEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABEug7ArPj4ymJfffifGES2OIErC3e/jfd/PJC+fCbvpk3kgAJkMBmEriw5x4ze9d4OvrM4pf2jkfzeE4CJNAbBPpWwxL8Jbd0NPozeNrNRPN4TgIk0BsE+lZgaaWzypjJqJalPZUyU7Rv9cbnyVaQQCOBvhVYAYaolmVZVrZcnmO3MADElAR6iEDfCyxt1ARHDHvoi2RTSGAVAn0vsIwyqfCIoecZujus8sHwEgl0k0DfCyyBb4z3cP1HMOwO1mHwiAR6ikCsp1qziY0x2qSVqT7QqPTrd92bue7sU9mNboIY+b1icXKj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TrmXjyt75HexO73eH5TVVhze51jcr/wUNDCsHtpGxJRmaFZHMLdnGdU0GuqxcGDWGY0f8P3FgocwJQES2DQCW6ZLuBqR4kujJ9D1O2wlPwaNaAQ+pl+7Te9+LW9m06ni3DwWtRpWznVwNl0jmPI5CKs/xPLvrzWV1EadjN/6OiQZAwmQQLcIbFkNKwwsfuuVI7ZKPmSWv1VQZkmV4xOTcl2P5QvYDHUaEgiO8f+JDBktbB29hb9R5Td+E0Uj24fpwbylEgcorMLEeUwC3SGwLTSsAJ2ZSadLrplSese4YxUf0LvP5kv/d1cGe6ue0cmPK3vH7wVFK6k3h5HAr8Od4R8x1adRq9JGJlKbU7Hh5Ek9Vt8urLECnpEACWwmgW0lsAJwxZfvPqy1vd+56Sl/JK/08rvPoMuYiV3/9/DbOq9M8UeI/wMz1XeDW+qpNnmtzCOxwVEIqiyEFgMJkECvENiWAkvgmpn3pUvGTMRv/I+TpZlMxnjemVWg57Qx2ZhyH9E3fye3SjleIgES6CKBbSuwokxLr34cnqF6HL5b0KDUiwablGqtc87ux7PRsjwnARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIgARIggc0i8P8J8TlyLA2sgAAAAABJRU5ErkJggg==" alt="FHIR logo" width="150" height="93">
+              <h3>FHIR API</h3>
+              <p>REST / JSON</p>
+            </div>
+            <div class="workflow-connector"><svg viewBox="0 0 80 22" aria-hidden="true"><line x1="1" y1="11" x2="72" y2="11"/><path d="M62 2l10 9-10 9"/></svg></div>
+            <div class="workflow-node">
+              <svg class="workflow-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 55V22h40v33M23 22V9h18v13M7 55h50M27 55V44h10v11M20 32h5m7 0h5m7 0h3M20 39h5m19 0h3M32 12v8m-4-4h8" stroke-width="2.6"/></svg>
+              <h3>EHR System</h3>
+              <p>Epic · Athenahealth · eClinicalWorks</p>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <div class="shell article-layout">
+      <aside class="toc" aria-label="On this page">
+        <div class="toc-heading">In this guide</div>
+        <a href="#overview">Overview</a>
+        <a href="#foundation">FHIR foundation</a>
+        <a href="#authentication">Authentication</a>
+        <a href="#exchange">Data exchange</a>
+        <a href="#variations">Vendor variations</a>
+        <a href="#adapters">EHR adapters</a>
+        <a href="#environments">Environments</a>
+        <a href="#monitoring">Monitoring</a>
+        <a href="#patterns">Integration patterns</a>
+        <a href="#summary">Summary</a>
+      </aside>
+
+      <article class="article">
+        <section class="intro-panel" id="overview">
+          <h2>Overview</h2>
+          <p>Iguana is designed to manage these realities by combining secure communication, flexible scripting, and pre-built adapters for major EHR vendors, including Epic, Athenahealth, and eClinicalWorks.</p>
+        </section>
+
+        <section class="article-section" id="foundation">
+          <h2>FHIR as the Foundation for EHR Connectivity</h2>
+          <p>FHIR defines how healthcare systems expose structured data through standardized REST endpoints. In production environments, these APIs allow external systems to exchange patient, encounter, and observation information securely and consistently.</p>
+          <p>EHR vendors build on this foundation by publishing their own FHIR implementations. While the data model remains consistent, differences appear in how each vendor handles authentication, endpoint configuration, and supported resources. Iguana bridges these variations by providing adaptable components that connect securely and predictably across systems.</p>
+        </section>
+
+        <section class="article-section" id="authentication">
+          <h2>Authentication and Authorization</h2>
+          <p>Production FHIR APIs rely on secure authentication and authorization to control access to sensitive data. Most vendors follow the SMART on FHIR specification, which extends OAuth 2.0 for healthcare use cases.</p>
+          <p>Common authentication patterns include server-to-server credentials, user-based authorization, and token-based backend services. These flows determine how an application obtains and maintains access to protected data.</p>
+          <h3>Common Authentication Patterns</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">Flow Type</th><th scope="col">Common Usage</th><th scope="col">Key Details</th></tr></thead>
+              <tbody>
+                <tr><td>Client Credentials</td><td>Server-to-server communication</td><td>Uses a client ID and secret to obtain an access token.</td></tr>
+                <tr><td>Authorization Code</td><td>User-initiated applications</td><td>User signs in through the EHR portal, then the application exchanges the code for a token.</td></tr>
+                <tr><td>Backend Services (JWT)</td><td>System-to-system services</td><td>Client signs a short-lived JSON Web Token with a private key and exchanges it for an access token.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout"><p>Iguana supports each of these flows through configurable scripts that securely handle credentials, store tokens, and automatically refresh them before expiry. This keeps operations uninterrupted while meeting security expectations.</p></div>
+        </section>
+
+        <section class="article-section" id="exchange">
+          <h2>Managing FHIR Data Exchange</h2>
+          <p>Once authenticated, systems communicate with the EHR FHIR server using standard CRUD operations (Create, Read, Update, and Delete). In practice, these interactions require additional handling for authentication headers, content types, and rate limits.</p>
+          <h3>Examples of common workflows</h3>
+          <div class="list-grid">
+            <div><strong>Patient demographics</strong><p>Retrieving patient demographics for synchronization across internal systems.</p></div>
+            <div><strong>Clinical observations</strong><p>Posting lab or device results to an EHR Observation endpoint.</p></div>
+            <div><strong>Encounter information</strong><p>Updating encounter information to maintain longitudinal patient records.</p></div>
+            <div><strong>HL7-to-FHIR transformation</strong><p>Transforming HL7 v2 messages into FHIR resources for downstream use.</p></div>
+          </div>
+          <p>Iguana's <code>net.http</code> and <code>json</code> modules, along with its translation and routing capabilities, give developers precise control over these exchanges. Requests, responses, and transformations can be inspected, logged, and adapted for production-level reliability.</p>
+        </section>
+
+        <section class="article-section" id="variations">
+          <h2>Vendor Variations and Real-World Considerations</h2>
+          <p>Even with FHIR's shared foundation, no two EHR implementations behave the same. Successful integration requires understanding both technical and operational nuances that differ between vendors and even between installations of the same system.</p>
+          <div class="two-col">
+            <div class="content-card"><h3>Between vendors</h3><ul><li>Authentication flows and token lifetimes vary</li><li>Endpoint URLs and required claims differ</li><li>Resource coverage may not include every FHIR entity</li><li>Custom extensions and vendor-specific fields are common</li></ul></div>
+            <div class="content-card"><h3>Within a single vendor</h3><ul><li>Sandbox and production environments can behave differently</li><li>Application registration processes may vary by organization</li><li>Required scopes and audiences can differ between installations</li></ul></div>
+          </div>
+          <p>These variations are shaped by how major vendors interpret and extend the FHIR specification. For example:</p>
+          <ul>
+            <li><strong>Epic</strong> often requires SMART on FHIR scopes, signed JWT authentication, and organization-specific base URLs.</li>
+            <li><strong>Athenahealth</strong> combines FHIR endpoints with proprietary REST APIs for scheduling and chart data, each with separate authentication flows.</li>
+            <li><strong>eClinicalWorks</strong> may provide multiple base URLs across practice modules and blend FHIR with hybrid endpoints or custom data extensions.</li>
+          </ul>
+          <p>Iguana provides a unified scripting layer to handle these differences through configurable logic and reusable adapters. As support for additional vendors expands, integrations can adopt new EHR APIs using the same architecture without rebuilding existing infrastructure or workflows.</p>
+        </section>
+
+        <section class="article-section" id="adapters">
+          <h2>Pre-Built EHR Adapters</h2>
+          <p>Iguana includes pre-built adapters for many EHR systems, including Epic, Athenahealth, and eClinicalWorks to name a few. Each adapter implements authentication, token handling, and request management patterns tailored to the vendor's platform.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">EHR Vendor</th><th scope="col">Description</th><th scope="col">IguanaX Adapter</th></tr></thead>
+              <tbody>
+                <tr><td>Epic</td><td>OAuth 2.0 with JWT-based client assertion, including automatic token management and built-in support for create, read, search, and extended FHIR operations.</td><td>Epic FHIR Adapter</td></tr>
+                <tr><td>Athenahealth</td><td>OAuth 2.0 system-level authentication with automatic token renewal and unified request handling across AthenaOne and FHIR APIs.</td><td>Athenahealth Adapter</td></tr>
+                <tr><td>eClinicalWorks</td><td>OAuth 2.0 (JWT) authorization with automatic token management and integrated support for create, read, and search FHIR operations, depending on sandbox permissions.</td><td>eClinicalWorks Adapter</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Adapters handle recurring tasks such as credential exchange, endpoint configuration, and error reporting. They can be extended or combined with new adapters as Iguana's library of EHR integrations grows, providing a scalable foundation for connecting to a wide range of systems.</p>
+        </section>
+
+        <section class="article-section" id="environments">
+          <h2>Managing Environments and Configuration</h2>
+          <p>Production EHR systems are typically divided into sandbox (development), certification (testing), and live (production) environments, each requiring unique credentials and endpoints. Iguana supports per-environment configuration, allowing integrations to move through development and validation stages without modifying underlying code.</p>
+          <h3>Best practices include</h3>
+          <ul><li>Keeping credentials and tokens secure and isolated from scripts</li><li>Parameterizing base URLs and configuration values for each environment</li><li>Logging and auditing configuration changes for traceability</li></ul>
+          <p>This approach ensures consistent behavior across environments, reduces deployment risk, and simplifies long-term maintenance for production integrations.</p>
+        </section>
+
+        <section class="article-section" id="monitoring">
+          <h2>Monitoring and Reliability</h2>
+          <p>Reliable data exchange requires continuous monitoring and error visibility. Iguana provides built-in tools for tracking:</p>
+          <div class="list-grid">
+            <div><strong>Connection health</strong><p>Connection status and token validity.</p></div>
+            <div><strong>Performance</strong><p>Message throughput, latency, and success rates.</p></div>
+            <div><strong>API errors</strong><p>HTTP response patterns and error conditions.</p></div>
+            <div><strong>Audit trails</strong><p>Detailed transaction logs for auditing and compliance reporting.</p></div>
+          </div>
+          <p>Integrated alerts and dashboards allow administrators to identify issues proactively and maintain consistent data flow between systems.</p>
+        </section>
+
+        <section class="article-section" id="patterns">
+          <h2>Common Integration Patterns</h2>
+          <p>Production FHIR integrations often extend beyond single API calls. Common use cases include:</p>
+          <div class="two-col">
+            <div class="content-card"><h3>Patient synchronization</h3><p>Pulling updates from an EHR and distributing across internal systems.</p></div>
+            <div class="content-card"><h3>Observation posting</h3><p>Submitting structured clinical results from devices or labs.</p></div>
+            <div class="content-card"><h3>Encounter updates</h3><p>Mapping and updating visit data using a mix of HL7 and FHIR.</p></div>
+            <div class="content-card"><h3>Hybrid orchestration</h3><p>Combining FHIR APIs with other data formats to support billing or scheduling workflows.</p></div>
+          </div>
+          <p>Iguana's modular channels and scripting environment allow these patterns to scale from individual connections to multi-system interoperability across an enterprise.</p>
+        </section>
+
+        <section class="article-section" id="summary">
+          <h2>Summary</h2>
+          <p>FHIR provides the shared language for healthcare data exchange, while production EHR integrations add authentication, authorization, and operational complexity. Iguana unifies these layers through secure token handling, adaptive data exchange, and pre-built adapters for many EHR vendors. Its flexible architecture and expanding adapter library make it well suited for organizations seeking reliable, scalable interoperability across healthcare systems.</p>
+        </section>
+
+        <section class="next" aria-labelledby="next-title">
+          <h2 id="next-title">Next: Explore More About FHIR</h2>
+          <p>Now that you’ve seen how FHIR APIs connect real EHR systems, you can return to the main FHIR Hub to explore other areas such as FHIR resources, profiles, and data models.</p>
+          <p><strong>Continue reading:</strong> FHIR Hub Overview →</p>
+        </section>
+      </article>
+    </div>
+  </main>
+</body>
+</html>
